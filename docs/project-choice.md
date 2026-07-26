@@ -1,0 +1,1 @@
+I am building a Course Planner MCP server for university students so that they can organize their courses, check prerequisites, and create a better study plan.
