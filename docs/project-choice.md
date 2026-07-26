@@ -1,1 +1,1 @@
-I am building a Course Planner MCP server for university students so that they can organize their courses, check prerequisites, and create a better study plan.
+I am building a Computer Engineering Course Planner MCP server for Computer Engineering students so that they can organize their academic path, check course prerequisites, track completed and remaining courses, and create a simplified semester study plan based on their progress and preferences.
