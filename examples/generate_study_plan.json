@@ -1,0 +1,11 @@
+{
+  "creditLimit": 18,
+  "preferredCategories": [
+    "Major",
+    "Faculty"
+  ],
+  "completedCourses": [
+    "COMP111",
+    "COMP112"
+  ]
+}
