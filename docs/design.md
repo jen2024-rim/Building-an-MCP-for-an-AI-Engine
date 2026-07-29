@@ -93,9 +93,17 @@ Stores student progress information:
 | Study plan generation logic may become complex. | Implement a simple rule-based recommendation system using prerequisites, credits, and course categories. |
 
 ---
+## Notes from reading an official MCP server
+
+- Tool names use clear action verbs such as search, list, and check.
+- Tool descriptions are short, clear, and explain exactly what the tool does.
+- Each tool focuses on one task only.
+- Input descriptions clearly explain what each field means.
+- Error messages are simple and easy to understand.
 
 ## 📦 Project Status
 
 This project is part of the **NxtFlows Academy — "Building an MCP for an AI Engine"** training cohort.
 
 ---
+
