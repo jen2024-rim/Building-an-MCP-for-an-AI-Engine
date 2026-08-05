@@ -11,20 +11,20 @@ The input fields and example responses below are based on the actual `src/schema
 
 ## Data Source Plan
 
-| Tool | Priority | Source | Fixture Path | Auth | Failure Modes | Example Response |
-|------|----------|--------|--------------|------|---------------|------------------|
-| search_courses | P0 | Local JSON | data/courses.json | None | True | See JSON example |
-| check_prerequisites | P0 | Local JSON | data/courses.json + data/student.json | None | True | See JSON example |
-| generate_study_plan | P0 | Local JSON | data/courses.json + data/student.json | None | True | See JSON example |
-| list_completed_courses | P1 | Local JSON | data/student.json | None | True | See JSON example |
-| list_remaining_courses | P1 | Local JSON | data/courses.json + data/student.json | None | True | See JSON example |
-| add_course_to_plan | P1 | Local JSON | data/student.json | None | True | See JSON example |
+| Tool | Priority | Source | Fixture Path | Auth | Rate Limits | Failure Modes | Example Response |
+|------|----------|--------|--------------|------|-------------|----------------|------------------|
+| search_courses | P0 | Local JSON | data/courses.json | None | N/A — local file, no external calls | True | See JSON example |
+| check_prerequisites | P0 | Local JSON | data/courses.json + data/student.json | None | N/A — local file, no external calls | True | See JSON example |
+| generate_study_plan | P0 | Local JSON | data/courses.json + data/student.json | None | N/A — local file, no external calls | True | See JSON example |
+| list_completed_courses | P1 | Local JSON | data/student.json | None | N/A — local file, no external calls | True | See JSON example |
+| list_remaining_courses | P1 | Local JSON | data/courses.json + data/student.json | None | N/A — local file, no external calls | True | See JSON example |
+| add_course_to_plan | P1 | Local JSON | data/student.json | None | N/A — local file, no external calls | True | See JSON example |
 
 ## Example Responses
 
 ### search_courses
 
-**Input (from tool code):** `query` (string), `limit` (number, optional — defaults to 5 in code, but not yet declared in the schema, see Known Issues).
+**Input (from tool code):** `query` (string), `limit` (number, optional — defaults to 5 in code).
 
 ```json
 {
@@ -59,7 +59,6 @@ The input fields and example responses below are based on the actual `src/schema
 ### generate_study_plan
 
 **Input (from tool code):** `creditLimit` (number), `preferredCategories` (string array), `completedCourses` (string array).
-*Note: the schema currently names these `maxCredits` / `preferredCategory` — see Known Issues below.*
 
 ```json
 {
@@ -98,7 +97,6 @@ The input fields and example responses below are based on the actual `src/schema
 ### add_course_to_plan
 
 **Input (from tool code):** `courseCode` (string), `semester` (string), `priority` (`"required"` | `"elective"`, optional).
-*Note: no `studentId` in the current schema/tool — see Known Issues below.*
 
 ```json
 {
@@ -108,12 +106,6 @@ The input fields and example responses below are based on the actual `src/schema
   "priority": "required"
 }
 ```
-
-## Known Issues (to fix before Week 3 implementation)
-
-- **generate_study_plan:** the schema defines `maxCredits` and `preferredCategory` (singular), but the tool code destructures `creditLimit` and `preferredCategories` (plural). These names must match, or the values will be `undefined` at runtime.
-- **search_courses:** the tool code reads a `limit` parameter, but `limit` is not declared in `searchCoursesInputSchema`. It should be added (e.g. `z.number().int().positive().optional()`).
-- **add_course_to_plan:** neither the schema nor the tool code accepts a `studentId`, so there is currently no way to know which student's plan is being updated. The example input file (`examples/add_course_to_plan.json`) includes a `studentId` that the schema does not define. This should be resolved — either add `studentId` to the schema, or explicitly document that the tool always acts on a single default/current student.
 
 ## Notes
 
