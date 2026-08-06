@@ -2,6 +2,7 @@
   "studentId": "1221682",
   "name": "Jeneen Sattouf",
   "major": "Computer Engineering",
+  "maxCredits": 18,
   "completedCourses": [
     "ARAB135",
     "ENGL1201",
@@ -15,7 +16,6 @@
       "courseCode": "MATH1321",
       "semester": "Spring 2027",
       "priority": "required"
-      "maxCredits": 18
     }
   ]
 }
