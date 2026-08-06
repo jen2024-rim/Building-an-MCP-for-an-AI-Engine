@@ -1,5 +1,4 @@
 import { listRemainingCourses } from "../lib/student.js";
-
 export async function listRemainingCoursesHandler(input: { includeElectives?: boolean }) {
   try {
     const result = await listRemainingCourses(input.includeElectives ?? true);
