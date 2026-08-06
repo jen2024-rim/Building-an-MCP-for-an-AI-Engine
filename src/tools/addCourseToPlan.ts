@@ -1,17 +1,30 @@
-import { addCourseToPlan } from "../lib/student.js";
+import { generateStudyPlan } from "../lib/courses.js";
 
-export async function addCourseToPlanHandler(input: {
-  courseCode: string;
-  semester: string;
-  priority?: "required" | "elective";
+export async function generateStudyPlanHandler(input: {
+  maxCredits: number;
+  preferredCategory?: string;
+  completedCourses: string[];
 }) {
   try {
-    const result = await addCourseToPlan(input.courseCode, input.semester, input.priority ?? "required");
-    return { content: [{ type: "text", text: JSON.stringify(result) }] };
+    const plan = await generateStudyPlan(
+      input.maxCredits,
+      input.preferredCategory,
+      input.completedCourses
+    );
+
+    if (plan.recommendedCourses.length === 0) {
+      return {
+        content: [
+          { type: "text", text: JSON.stringify({ recommendedCourses: [], totalCredits: 0, message: "No eligible courses found for this credit limit." }) },
+        ],
+      };
+    }
+
+    return { content: [{ type: "text", text: JSON.stringify(plan) }] };
   } catch (err) {
-    console.error(`[add_course_to_plan] failed: ${(err as Error).message}`);
+    console.error(`[generate_study_plan] failed: ${(err as Error).message}`);
     return {
-      content: [{ type: "text", text: "Sorry, I couldn't add that course to the plan right now." }],
+      content: [{ type: "text", text: "Sorry, I couldn't generate a study plan right now." }],
       isError: true,
     };
   }
