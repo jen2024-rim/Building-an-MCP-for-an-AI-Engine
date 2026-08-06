@@ -15,6 +15,7 @@
       "courseCode": "MATH1321",
       "semester": "Spring 2027",
       "priority": "required"
+      "maxCredits": 18
     }
   ]
 }
