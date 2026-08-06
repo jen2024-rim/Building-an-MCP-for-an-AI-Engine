@@ -1,41 +1,23 @@
-import type { McpServer } from "@modelcontextprotocol/server";
+import { listRemainingCourses } from "../lib/student.js";
 
-import { listRemainingCoursesInputSchema } from "../schemas/listRemainingCourses.js";
+export async function listRemainingCoursesHandler(input: { includeElectives?: boolean }) {
+  try {
+    const result = await listRemainingCourses(input.includeElectives ?? true);
 
-/**
- * Week 2 stub — List remaining courses.
- *
- * Week 2: return placeholder response.
- * Week 3: calculate remaining courses from student progress.
- */
-export function registerListRemainingCoursesTool(server: McpServer): void {
-  server.registerTool(
-    "list_remaining_courses",
-    {
-      description:
-        "Display the courses that the student still needs to complete.",
-      inputSchema: listRemainingCoursesInputSchema,
-    },
-    async ({ studentId, includeElectives }) => {
+    if (result.remainingCourses.length === 0) {
       return {
         content: [
-          {
-            type: "text",
-            text: JSON.stringify(
-              {
-                stub: true,
-                tool: "list_remaining_courses",
-                studentId,
-                includeElectives,
-                message:
-                  "Replace this stub in Week 3 with real remaining course calculation.",
-              },
-              null,
-              2,
-            ),
-          },
+          { type: "text", text: JSON.stringify({ ...result, message: "No remaining courses — everything is completed!" }) },
         ],
       };
-    },
-  );
+    }
+
+    return { content: [{ type: "text", text: JSON.stringify(result) }] };
+  } catch (err) {
+    console.error(`[list_remaining_courses] failed: ${(err as Error).message}`);
+    return {
+      content: [{ type: "text", text: "Sorry, I couldn't load remaining courses right now." }],
+      isError: true,
+    };
+  }
 }
