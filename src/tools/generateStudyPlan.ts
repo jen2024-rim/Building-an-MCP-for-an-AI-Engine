@@ -1,25 +1,18 @@
 import { generateStudyPlan } from "../lib/courses.js";
+import { loadStudent } from "../lib/student.js";
 
 export async function generateStudyPlanHandler(input: {
   maxCredits: number;
   preferredCategory?: string;
-  completedCourses: string[];
 }) {
   try {
-    const plan = await generateStudyPlan(
+    const student = await loadStudent();
+    const result = await generateStudyPlan(
       input.maxCredits,
       input.preferredCategory,
-      input.completedCourses
+      student.completedCourses
     );
-
-    if (plan.recommendedCourses.length === 0) {
-      return {
-        content: [
-          { type: "text", text: JSON.stringify({ recommendedCourses: [], totalCredits: 0, message: "No eligible courses found for this credit limit." }) },
-        ],
-      };
-    }
-    return { content: [{ type: "text", text: JSON.stringify(plan) }] };
+    return { content: [{ type: "text", text: JSON.stringify(result) }] };
   } catch (err) {
     console.error(`[generate_study_plan] failed: ${(err as Error).message}`);
     return {
