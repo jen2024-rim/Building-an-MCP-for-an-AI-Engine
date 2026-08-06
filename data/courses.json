@@ -11,7 +11,7 @@
     "description": "Foundational Arabic language and communication skills."
   },
   {
-    "code": "ENGL1201",
+    "code": "ENGC1201",
     "name": "Intermediate English 1",
     "credits": 2,
     "year": 1,
@@ -95,7 +95,7 @@
     "semester": 2,
     "category": "University Requirement",
     "type": "Core",
-    "prerequisites": ["ENGL1201"],
+    "prerequisites": ["ENGC1201"],
     "description": "Intermediate-level English language course, part 2."
   },
   {
@@ -194,7 +194,7 @@
     "semester": 1,
     "category": "University Requirement",
     "type": "Core",
-    "prerequisites": ["ENGL1202"],
+    "prerequisites": ["ENGC1202"],
     "description": "Intermediate-level English language course, part 3."
   },
   {
