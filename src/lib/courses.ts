@@ -72,26 +72,29 @@ export async function checkPrerequisites(
   };
 }
 
-/** P0 — generate_study_plan */
+/**
+ * P0 — generate_study_plan
+ * NOTE: parameter names now match generateStudyPlanInputSchema exactly
+ * (maxCredits, preferredCategory — singular optional) to fix the
+ * previous schema/code naming mismatch.
+ */
 export async function generateStudyPlan(
-  creditLimit: number,
-  preferredCategories: string[],
+  maxCredits: number,
+  preferredCategory: string | undefined,
   completedCourses: string[]
-): Promise<{ recommendedCourses: Course[]; totalCredits: number; creditLimit: number }> {
+): Promise<{ recommendedCourses: Course[]; totalCredits: number; maxCredits: number }> {
   const courses = await loadCourses();
 
-  // Only courses the student hasn't completed and whose prerequisites are met
   const eligible = courses.filter((c) => {
     if (completedCourses.includes(c.code)) return false;
     const prereqsMet = c.prerequisites.every((p) => completedCourses.includes(p));
     return prereqsMet;
   });
 
-  // Prefer courses in the requested categories, if any were given
-  const prioritized = preferredCategories.length
+  const prioritized = preferredCategory
     ? [
-        ...eligible.filter((c) => preferredCategories.includes(c.category)),
-        ...eligible.filter((c) => !preferredCategories.includes(c.category)),
+        ...eligible.filter((c) => c.category === preferredCategory),
+        ...eligible.filter((c) => c.category !== preferredCategory),
       ]
     : eligible;
 
@@ -99,12 +102,12 @@ export async function generateStudyPlan(
   let totalCredits = 0;
 
   for (const course of prioritized) {
-    if (totalCredits + course.credits > creditLimit) continue;
+    if (totalCredits + course.credits > maxCredits) continue;
     recommendedCourses.push(course);
     totalCredits += course.credits;
   }
 
-  return { recommendedCourses, totalCredits, creditLimit };
+  return { recommendedCourses, totalCredits, maxCredits };
 }
 
 /** P1 — list_remaining_courses (needs course list + student's completed list) */
