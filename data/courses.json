@@ -88,7 +88,7 @@
     "description": "Introduction to programming logic and problem solving."
   },
   {
-    "code": "ENGL1201",
+    "code": "ENGC1202",
     "name": "Intermediate English 2",
     "credits": 2,
     "year": 1,
@@ -194,7 +194,7 @@
     "semester": 1,
     "category": "University Requirement",
     "type": "Core",
-    "prerequisites": ["ENGL1200"],
+    "prerequisites": ["ENGL1202"],
     "description": "Intermediate-level English language course, part 3."
   },
   {
