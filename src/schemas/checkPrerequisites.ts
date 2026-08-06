@@ -7,8 +7,4 @@ export const checkPrerequisitesInputSchema = z.object({
     .min(1)
     .max(20)
     .describe("Course code to check prerequisites for"),
-
-  completedCourses: z
-    .array(z.string())
-    .describe("List of courses already completed by the student"),
 });
