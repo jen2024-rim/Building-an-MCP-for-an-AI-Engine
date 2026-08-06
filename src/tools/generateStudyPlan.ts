@@ -1,46 +1,31 @@
-import type { McpServer } from "@modelcontextprotocol/server";
+import { generateStudyPlan } from "../lib/courses.js";
 
-import { generateStudyPlanInputSchema } from "../schemas/generateStudyPlan.js";
+export async function generateStudyPlanHandler(input: {
+  creditLimit: number;
+  preferredCategories: string[];
+  completedCourses: string[];
+}) {
+  try {
+    const plan = await generateStudyPlan(
+      input.creditLimit,
+      input.preferredCategories,
+      input.completedCourses
+    );
 
-/**
- * Week 2 stub — Generate semester study plan.
- *
- * Week 3: replace with real planning algorithm.
- */
-export function registerGenerateStudyPlanTool(server: McpServer): void {
-
-  server.registerTool(
-    "generate_study_plan",
-    {
-      description:
-        "Generate a suggested semester plan based on completed courses, credit limit, and preferences.",
-      inputSchema: generateStudyPlanInputSchema,
-    },
-
-    async ({ creditLimit, preferredCategories, completedCourses }) => {
-
+    if (plan.recommendedCourses.length === 0) {
       return {
         content: [
-          {
-            type: "text",
-            text: JSON.stringify(
-              {
-                stub: true,
-                tool: "generate_study_plan",
-                creditLimit,
-                preferredCategories,
-                completedCourses,
-                message:
-                  "Replace this stub in Week 3 with study plan generation logic.",
-              },
-              null,
-              2,
-            ),
-          },
+          { type: "text", text: JSON.stringify({ recommendedCourses: [], totalCredits: 0, message: "No eligible courses found for this credit limit." }) },
         ],
       };
+    }
 
-    },
-  );
-
+    return { content: [{ type: "text", text: JSON.stringify(plan) }] };
+  } catch (err) {
+    console.error(`[generate_study_plan] failed: ${(err as Error).message}`);
+    return {
+      content: [{ type: "text", text: "Sorry, I couldn't generate a study plan right now." }],
+      isError: true,
+    };
+  }
 }
