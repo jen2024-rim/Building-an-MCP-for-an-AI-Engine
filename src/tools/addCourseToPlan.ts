@@ -11,7 +11,6 @@ export async function generateStudyPlanHandler(input: {
       input.preferredCategory,
       input.completedCourses
     );
-
     
     if (plan.recommendedCourses.length === 0) {
       return {
