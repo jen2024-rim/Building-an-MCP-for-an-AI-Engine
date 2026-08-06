@@ -1,14 +1,14 @@
 import { generateStudyPlan } from "../lib/courses.js";
 
 export async function generateStudyPlanHandler(input: {
-  creditLimit: number;
-  preferredCategories: string[];
+  maxCredits: number;
+  preferredCategory?: string;
   completedCourses: string[];
 }) {
   try {
     const plan = await generateStudyPlan(
-      input.creditLimit,
-      input.preferredCategories,
+      input.maxCredits,
+      input.preferredCategory,
       input.completedCourses
     );
 

@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { readJsonFile } from "./file.js";
 
-// Shape of a single course, matching data/courses.json
 export const courseSchema = z.object({
   code: z.string().min(1),
   name: z.string().min(1),
@@ -18,21 +17,105 @@ export type Course = z.infer<typeof courseSchema>;
 
 const coursesFileSchema = z.array(courseSchema);
 
-/**
- * Loads data/courses.json, validates it with Zod, and returns
- * a typed, guaranteed-valid array of courses.
- * Throws a clear error if the file is missing, empty, or malformed.
- */
 export async function loadCourses(): Promise<Course[]> {
   const raw = await readJsonFile<unknown>("courses.json");
-
   const result = coursesFileSchema.safeParse(raw);
   if (!result.success) {
-    console.error("courses.json failed validation:", result.error.format());
-    throw new Error(
-      "courses.json is malformed — check the console for details."
-    );
+    console.error("[courses] courses.json failed validation:", result.error.format());
+    throw new Error("courses.json is malformed — check the logs for details.");
+  }
+  return result.data;
+}
+
+export function getCourseByCode(courses: Course[], code: string): Course | undefined {
+  return courses.find((c) => c.code === code);
+}
+
+/** P0 — search_courses */
+export async function searchCourses(
+  query: string,
+  category?: string,
+  limit = 5
+): Promise<Course[]> {
+  const courses = await loadCourses();
+  const q = query.trim().toLowerCase();
+
+  let results = courses.filter(
+    (c) => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)
+  );
+
+  if (category) {
+    results = results.filter((c) => c.category === category);
   }
 
-  return result.data;
+  return results.slice(0, Math.max(1, limit));
+}
+
+/** P0 — check_prerequisites */
+export async function checkPrerequisites(
+  courseCode: string,
+  completedCourses: string[]
+): Promise<{ courseCode: string; eligible: boolean; missingPrerequisites: string[] }> {
+  const courses = await loadCourses();
+  const course = getCourseByCode(courses, courseCode);
+
+  if (!course) {
+    throw new Error(`Course "${courseCode}" was not found.`);
+  }
+
+  const missing = course.prerequisites.filter((p) => !completedCourses.includes(p));
+
+  return {
+    courseCode,
+    eligible: missing.length === 0,
+    missingPrerequisites: missing,
+  };
+}
+
+/** P0 — generate_study_plan */
+export async function generateStudyPlan(
+  creditLimit: number,
+  preferredCategories: string[],
+  completedCourses: string[]
+): Promise<{ recommendedCourses: Course[]; totalCredits: number; creditLimit: number }> {
+  const courses = await loadCourses();
+
+  // Only courses the student hasn't completed and whose prerequisites are met
+  const eligible = courses.filter((c) => {
+    if (completedCourses.includes(c.code)) return false;
+    const prereqsMet = c.prerequisites.every((p) => completedCourses.includes(p));
+    return prereqsMet;
+  });
+
+  // Prefer courses in the requested categories, if any were given
+  const prioritized = preferredCategories.length
+    ? [
+        ...eligible.filter((c) => preferredCategories.includes(c.category)),
+        ...eligible.filter((c) => !preferredCategories.includes(c.category)),
+      ]
+    : eligible;
+
+  const recommendedCourses: Course[] = [];
+  let totalCredits = 0;
+
+  for (const course of prioritized) {
+    if (totalCredits + course.credits > creditLimit) continue;
+    recommendedCourses.push(course);
+    totalCredits += course.credits;
+  }
+
+  return { recommendedCourses, totalCredits, creditLimit };
+}
+
+/** P1 — list_remaining_courses (needs course list + student's completed list) */
+export async function getRemainingCourses(
+  completedCourses: string[],
+  includeElectives = true
+): Promise<Course[]> {
+  const courses = await loadCourses();
+  return courses.filter((c) => {
+    if (completedCourses.includes(c.code)) return false;
+    if (!includeElectives && c.type === "Elective") return false;
+    return true;
+  });
 }
