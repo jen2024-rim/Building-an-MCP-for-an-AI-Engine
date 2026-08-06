@@ -12,6 +12,7 @@ export async function generateStudyPlanHandler(input: {
       input.completedCourses
     );
 
+    
     if (plan.recommendedCourses.length === 0) {
       return {
         content: [
