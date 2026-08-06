@@ -19,7 +19,6 @@ export async function generateStudyPlanHandler(input: {
         ],
       };
     }
-
     return { content: [{ type: "text", text: JSON.stringify(plan) }] };
   } catch (err) {
     console.error(`[generate_study_plan] failed: ${(err as Error).message}`);
