@@ -1,42 +1,18 @@
-import type { McpServer } from "@modelcontextprotocol/server";
+import { addCourseToPlan } from "../lib/student.js";
 
-import { addCourseToPlanInputSchema } from "../schemas/addCourseToPlan.js";
-
-/**
- * Week 2 stub — Add course to semester plan.
- *
- * Week 2: return placeholder response.
- * Week 3: update the student's planned courses.
- */
-export function registerAddCourseToPlanTool(server: McpServer): void {
-  server.registerTool(
-    "add_course_to_plan",
-    {
-      description:
-        "Add a selected course to the student's planned semester schedule.",
-      inputSchema: addCourseToPlanInputSchema,
-    },
-    async ({ courseCode, semester, priority }) => {
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify(
-              {
-                stub: true,
-                tool: "add_course_to_plan",
-                courseCode,
-                semester,
-                priority,
-                message:
-                  "Replace this stub in Week 3 with real course planning.",
-              },
-              null,
-              2,
-            ),
-          },
-        ],
-      };
-    },
-  );
+export async function addCourseToPlanHandler(input: {
+  courseCode: string;
+  semester: string;
+  priority?: "required" | "elective";
+}) {
+  try {
+    const result = await addCourseToPlan(input.courseCode, input.semester, input.priority ?? "required");
+    return { content: [{ type: "text", text: JSON.stringify(result) }] };
+  } catch (err) {
+    console.error(`[add_course_to_plan] failed: ${(err as Error).message}`);
+    return {
+      content: [{ type: "text", text: "Sorry, I couldn't add that course to the plan right now." }],
+      isError: true,
+    };
+  }
 }
