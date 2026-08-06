@@ -1,0 +1,20 @@
+{
+  "studentId": "1221682",
+  "name": "Jeneen Sattouf",
+  "major": "Computer Engineering",
+  "completedCourses": [
+    "ARAB135",
+    "ENGL1201",
+    "ENME120",
+    "MATH1411",
+    "PHYS111",
+    "PHYS141"
+  ],
+  "currentPlan": [
+    {
+      "courseCode": "MATH1321",
+      "semester": "Spring 2027",
+      "priority": "required"
+    }
+  ]
+}
