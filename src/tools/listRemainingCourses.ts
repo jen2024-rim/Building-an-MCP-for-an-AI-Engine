@@ -1,7 +1,14 @@
 import { listRemainingCourses } from "../lib/student.js";
-export async function listRemainingCoursesHandler(input: { includeElectives?: boolean }) {
+export async function listRemainingCoursesHandler(input: { studentId: string; includeElectives?: boolean }) {
   try {
     const result = await listRemainingCourses(input.includeElectives ?? true);
+
+    if (result.studentId !== input.studentId) {
+      return {
+        content: [{ type: "text", text: "No matching student record for the given studentId." }],
+        isError: true,
+      };
+    }
 
     if (result.remainingCourses.length === 0) {
       return {
