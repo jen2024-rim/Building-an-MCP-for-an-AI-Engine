@@ -183,6 +183,8 @@ Therefore, there are no P0 security fixes required from this peer review.
 | **Peer reviewer** | Roa Makhtoub |
 | **P0 security findings** | None |
 | **Current status** | Improvements and recommended fixes are being worked on (`week-4-harden` branch) |
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/c314058c-27df-4fc9-aa2d-ef829685bd25" />
+
 
 
 
