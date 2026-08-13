@@ -15,7 +15,7 @@
 
 The screenshot below documents the peer review summary email sent by Roa Makhtoub on August 12, 2026.
 
-![Peer review email from Roa Makhtoub](./peer-review-email-screenshot.png)
+![Peer review email from Roa Makhtoub](<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/88f7d05b-4939-44df-8c10-b45a999ac196" />)
 
 ---
 
@@ -183,3 +183,6 @@ Therefore, there are no P0 security fixes required from this peer review.
 | **Peer reviewer** | Roa Makhtoub |
 | **P0 security findings** | None |
 | **Current status** | Improvements and recommended fixes are being worked on (`week-4-harden` branch) |
+
+
+
