@@ -1,3 +1,4 @@
+```ts
 import { checkPrerequisites } from "../lib/courses.js";
 import { loadStudent } from "../lib/student.js";
 
@@ -6,13 +7,41 @@ export async function checkPrerequisitesHandler(input: {
 }) {
   try {
     const student = await loadStudent();
-    const result = await checkPrerequisites(input.courseCode, student.completedCourses);
-    return { content: [{ type: "text", text: JSON.stringify(result) }] };
-  } catch (err) {
-    console.error(`[check_prerequisites] failed: ${(err as Error).message}`);
+
+    const result = await checkPrerequisites(
+      input.courseCode,
+      student.completedCourses
+    );
+
     return {
-      content: [{ type: "text", text: "Sorry, I couldn't check prerequisites right now." }],
+      content: [{ type: "text", text: JSON.stringify(result) }],
+    };
+  } catch (err) {
+    const errorMessage = (err as Error).message;
+
+    console.error(`[check_prerequisites] failed: ${errorMessage}`);
+
+    if (errorMessage.includes("was not found")) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `${errorMessage} Please check the course code and try again.`,
+          },
+        ],
+        isError: true,
+      };
+    }
+
+    return {
+      content: [
+        {
+          type: "text",
+          text: "Unable to check prerequisites because the course data could not be loaded.",
+        },
+      ],
       isError: true,
     };
   }
 }
+```
