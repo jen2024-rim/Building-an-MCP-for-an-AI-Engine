@@ -10,6 +10,16 @@ export const searchCoursesInputSchema = z.object({
 
   category: z
     .string()
+    .min(1)
+    .max(50)
     .optional()
     .describe("Optional course category such as AI, Networks, or Hardware"),
+
+  limit: z
+    .number()
+    .int()
+    .positive()
+    .max(20)
+    .optional()
+    .describe("Maximum number of results to return (default 5, capped at 20)"),
 });
