@@ -4,9 +4,9 @@ import * as z from "zod/v4";
 export const searchCoursesInputSchema = z.object({
   query: z
     .string()
-    .min(1)
     .max(200)
-    .describe("Course name, code, or category keyword to search for"),
+    .optional()
+    .describe("Optional course name, code, or category keyword to search for"),
 
   category: z
     .string()
