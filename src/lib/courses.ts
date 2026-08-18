@@ -27,25 +27,48 @@ export async function loadCourses(): Promise<Course[]> {
   return result.data;
 }
 
-export function getCourseByCode(courses: Course[], code: string): Course | undefined {
-  return courses.find((c) => c.code === code);
+export function getCourseByCode(
+  courses: Course[],
+  code: string
+): Course | undefined {
+  const normalizedCode = code.trim().toLowerCase();
+
+  return courses.find(
+    (c) => c.code.trim().toLowerCase() === normalizedCode
+  );
 }
 
 /** P0 — search_courses */
 export async function searchCourses(
-  query: string,
+  query: string | undefined,
   category?: string,
   limit = 5
 ): Promise<Course[]> {
   const courses = await loadCourses();
-  const q = query.trim().toLowerCase();
 
-  let results = courses.filter(
-    (c) => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)
-  );
+  const q = query?.trim().toLowerCase();
+  const normalizedCategory = category?.trim().toLowerCase();
 
-  if (category) {
-    results = results.filter((c) => c.category === category);
+  let results = courses;
+
+  if (q) {
+    results = results.filter((c) => {
+      const name = c.name.trim().toLowerCase();
+      const code = c.code.trim().toLowerCase();
+      const courseCategory = c.category.trim().toLowerCase();
+
+      return (
+        name.includes(q) ||
+        code.includes(q) ||
+        courseCategory.includes(q)
+      );
+    });
+  }
+
+  if (normalizedCategory) {
+    results = results.filter(
+      (c) => c.category.trim().toLowerCase() === normalizedCategory
+    );
   }
 
   return results.slice(0, Math.max(1, limit));
@@ -63,7 +86,14 @@ export async function checkPrerequisites(
     throw new Error(`Course "${courseCode}" was not found.`);
   }
 
-  const missing = course.prerequisites.filter((p) => !completedCourses.includes(p));
+  const normalizedCompletedCourses = completedCourses.map(
+  (code) => code.trim().toLowerCase()
+);
+
+const missing = course.prerequisites.filter(
+  (prerequisite) =>
+    !normalizedCompletedCourses.includes(prerequisite.trim().toLowerCase())
+);
 
   return {
     courseCode,
