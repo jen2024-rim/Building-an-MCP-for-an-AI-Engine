@@ -13,9 +13,10 @@
   ],
   "currentPlan": [
     {
-      "courseCode": "MATH1321",
       "semester": "Spring 2027",
-      "priority": "required"
+      "courses": [
+        "MATH1321"
+      ]
     }
   ]
 }
