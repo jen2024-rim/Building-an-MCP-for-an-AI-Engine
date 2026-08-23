@@ -1,10 +1,10 @@
 import * as z from "zod/v4";
 
-// Schema for list_completed_courses tool
-export const listCompletedCoursesInputSchema = z.object({
-  studentId: z
+// Schema for complete_course tool
+export const completeCourseInputSchema = z.object({
+  courseCode: z
     .string()
     .min(1)
-    .max(50)
-    .describe("Student identifier to retrieve completed courses"),
+    .max(20)
+    .describe("Course code to mark as completed (moves it from the current plan to completed courses)"),
 });
