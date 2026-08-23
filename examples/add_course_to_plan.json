@@ -1,4 +1,4 @@
 {
-  "studentId": "120230123",
-  "courseCode": "COMP331"
+  "semester": "Spring 2027",
+  "courseCodes": ["MATH1321", "COMP2421", "ENCS2380"]
 }
