@@ -1,11 +1,7 @@
 {
-  "creditLimit": 18,
-  "preferredCategories": [
-    "Major",
-    "Faculty"
-  ],
-  "completedCourses": [
-    "COMP111",
-    "COMP112"
-  ]
+  "minCredits": 14,
+  "maxCredits": 18,
+  "maxProjects": 2,
+  "maxLabs": 1,
+  "goal": "stay_on_track"
 }
