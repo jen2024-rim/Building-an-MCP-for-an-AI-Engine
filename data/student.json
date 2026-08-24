@@ -5,7 +5,7 @@
   "maxCredits": 18,
   "completedCourses": [
     "ARAB135",
-    "ENGL1201",
+    "ENGC1201",
     "ENME120",
     "MATH1411",
     "PHYS111",
@@ -13,9 +13,10 @@
   ],
   "currentPlan": [
     {
-      "courseCode": "MATH1321",
       "semester": "Spring 2027",
-      "priority": "required"
+      "courses": [
+        "MATH1321"
+      ]
     }
   ]
 }

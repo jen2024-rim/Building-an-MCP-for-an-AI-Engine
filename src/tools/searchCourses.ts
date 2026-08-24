@@ -1,7 +1,7 @@
 import { searchCourses } from "../lib/courses.js";
 
 export async function searchCoursesHandler(input: {
-  query: string;
+  query?: string;
   category?: string;
   limit?: number;
 }) {
@@ -11,18 +11,20 @@ export async function searchCoursesHandler(input: {
     if (results.length === 0) {
       return {
         content: [
-          { type: "text", text: JSON.stringify({ courses: [], message: "No courses matched your search." }) },
+          { type: "text" as const, text: JSON.stringify({ courses: [], message: "No courses matched your search." }) },
         ],
       };
     }
 
     return {
-      content: [{ type: "text", text: JSON.stringify({ courses: results, count: results.length }) }],
+      content: [{ type: "text" as const, text: JSON.stringify({ courses: results, count: results.length }) }],
     };
   } catch (err) {
     console.error(`[search_courses] failed: ${(err as Error).message}`);
     return {
-      content: [{ type: "text", text: "Sorry, I couldn't search courses right now." }],
+      content: [
+        { type: "text" as const, text: "Unable to search courses right now. Please verify that courses.json is valid." },
+      ],
       isError: true,
     };
   }

@@ -4,16 +4,23 @@ import * as z from "zod/v4";
 export const searchCoursesInputSchema = z.object({
   query: z
     .string()
-    .min(1)
     .max(200)
-    .describe("Course name, code, or category keyword to search for"),
+    .optional()
+    .describe(
+      "Optional keyword to search for in the course name, code, or description (case-insensitive)."
+    ),
 
   category: z
     .string()
     .min(1)
     .max(50)
     .optional()
-    .describe("Optional course category such as AI, Networks, or Hardware"),
+    .describe(
+      "Optional filter matched case-insensitively against either the requirement type " +
+        '(e.g. "University Requirement", "College Requirement", "Specialization Requirement", ' +
+        '"Specialization Elective") or the specialization area (e.g. "AI", "Hardware", "Software", "Networks"). ' +
+        "Can be used on its own without a query."
+    ),
 
   limit: z
     .number()

@@ -7,6 +7,7 @@ import { generateStudyPlanInputSchema } from "./schemas/generateStudyPlan.js";
 import { listCompletedCoursesInputSchema } from "./schemas/listCompletedCourses.js";
 import { listRemainingCoursesInputSchema } from "./schemas/listRemainingCourses.js";
 import { addCourseToPlanInputSchema } from "./schemas/addCourseToPlan.js";
+import { completeCourseInputSchema } from "./schemas/completeCourse.js";
 
 import { searchCoursesHandler } from "./tools/searchCourses.js";
 import { checkPrerequisitesHandler } from "./tools/checkPrerequisites.js";
@@ -14,6 +15,7 @@ import { generateStudyPlanHandler } from "./tools/generateStudyPlan.js";
 import { listCompletedCoursesHandler } from "./tools/listCompletedCourses.js";
 import { listRemainingCoursesHandler } from "./tools/listRemainingCourses.js";
 import { addCourseToPlanHandler } from "./tools/addCourseToPlan.js";
+import { completeCourseHandler } from "./tools/completeCourse.js";
 
 const server = new McpServer({
   name: "course-planner-mcp",
@@ -22,7 +24,11 @@ const server = new McpServer({
 
 server.registerTool(
   "search_courses",
-  { description: "Search for courses by name, code, or category keyword.", inputSchema: searchCoursesInputSchema.shape },
+  {
+    description:
+      "Search for courses by name, code, description, requirement type, or specialization area. All matching is case-insensitive, and either the query or the category filter alone is enough to search.",
+    inputSchema: searchCoursesInputSchema.shape,
+  },
   searchCoursesHandler
 );
 
@@ -34,7 +40,11 @@ server.registerTool(
 
 server.registerTool(
   "generate_study_plan",
-  { description: "Generate a recommended set of courses for the next semester within a credit limit.", inputSchema: generateStudyPlanInputSchema.shape },
+  {
+    description:
+      "Generate up to three study plan options (e.g. Balanced, Lighter workload, Faster progress) within a credit/project/lab workload range, based on completed courses and academic priority (eligibility, required courses, and course dependencies).",
+    inputSchema: generateStudyPlanInputSchema.shape,
+  },
   generateStudyPlanHandler
 );
 
@@ -52,8 +62,22 @@ server.registerTool(
 
 server.registerTool(
   "add_course_to_plan",
-  { description: "Add a course to the student's current semester plan.", inputSchema: addCourseToPlanInputSchema.shape },
+  {
+    description:
+      "Add one or more approved courses to the student's plan for a given semester. Preserves existing plans for other semesters and skips courses that are already planned or already completed.",
+    inputSchema: addCourseToPlanInputSchema.shape,
+  },
   addCourseToPlanHandler
+);
+
+server.registerTool(
+  "complete_course",
+  {
+    description:
+      "Mark a course as completed: removes it from the student's current plan (if present) and adds it to completed courses.",
+    inputSchema: completeCourseInputSchema.shape,
+  },
+  completeCourseHandler
 );
 
 async function main() {

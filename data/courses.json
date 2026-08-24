@@ -5,8 +5,11 @@
     "credits": 3,
     "year": 1,
     "semester": 1,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 0,
     "prerequisites": [],
     "description": "Foundational Arabic language and communication skills."
   },
@@ -16,8 +19,11 @@
     "credits": 2,
     "year": 1,
     "semester": 1,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 0,
     "prerequisites": [],
     "description": "Intermediate-level English language course, part 1."
   },
@@ -27,8 +33,11 @@
     "credits": 2,
     "year": 1,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 1,
     "prerequisites": [],
     "description": "Introductory engineering workshop and hands-on skills."
   },
@@ -38,8 +47,11 @@
     "credits": 4,
     "year": 1,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 0,
     "prerequisites": [],
     "description": "Limits, derivatives, and introductory integral calculus."
   },
@@ -49,8 +61,11 @@
     "credits": 1,
     "year": 1,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": true,
+    "projectCount": 0,
     "prerequisites": [],
     "description": "Laboratory sessions accompanying General Physics 1."
   },
@@ -60,8 +75,11 @@
     "credits": 4,
     "year": 1,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 0,
     "prerequisites": [],
     "description": "Mechanics, motion, and forces — first physics course."
   },
@@ -71,9 +89,14 @@
     "credits": 3,
     "year": 1,
     "semester": 2,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["ARAB135"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "ARAB135"
+    ],
     "description": "Continuation of Arabic Language Skills 1."
   },
   {
@@ -82,8 +105,11 @@
     "credits": 3,
     "year": 1,
     "semester": 2,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 1,
     "prerequisites": [],
     "description": "Introduction to programming logic and problem solving."
   },
@@ -93,9 +119,14 @@
     "credits": 2,
     "year": 1,
     "semester": 2,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["ENGC1201"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "ENGC1201"
+    ],
     "description": "Intermediate-level English language course, part 2."
   },
   {
@@ -104,8 +135,11 @@
     "credits": 2,
     "year": 1,
     "semester": 2,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
+    "hasLab": false,
+    "projectCount": 1,
     "prerequisites": [],
     "description": "Fundamentals of technical and engineering drawing."
   },
@@ -115,9 +149,14 @@
     "credits": 3,
     "year": 1,
     "semester": 2,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["MATH1411"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "MATH1411"
+    ],
     "description": "Series, techniques of integration, and multivariable introduction."
   },
   {
@@ -126,9 +165,14 @@
     "credits": 1,
     "year": 1,
     "semester": 2,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["PHYS141"],
+    "hasLab": true,
+    "projectCount": 0,
+    "prerequisites": [
+      "PHYS141"
+    ],
     "description": "Laboratory sessions accompanying General Physics 2."
   },
   {
@@ -137,9 +181,14 @@
     "credits": 3,
     "year": 1,
     "semester": 2,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["PHYS141"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "PHYS141"
+    ],
     "description": "Electricity, magnetism, and waves — second physics course."
   },
   {
@@ -148,9 +197,14 @@
     "credits": 3,
     "year": 2,
     "semester": 1,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Software",
     "type": "Core",
-    "prerequisites": ["COMP133"],
+    "hasLab": false,
+    "projectCount": 1,
+    "prerequisites": [
+      "COMP133"
+    ],
     "description": "Object-oriented design and programming, typically in Java."
   },
   {
@@ -159,9 +213,14 @@
     "credits": 3,
     "year": 2,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["MATH1411"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "MATH1411"
+    ],
     "description": "Logic, set theory, combinatorics, and graph theory."
   },
   {
@@ -170,9 +229,14 @@
     "credits": 3,
     "year": 2,
     "semester": 1,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Hardware",
     "type": "Core",
-    "prerequisites": ["COMP133"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "COMP133"
+    ],
     "description": "Boolean algebra, logic gates, and digital circuit design."
   },
   {
@@ -181,9 +245,14 @@
     "credits": 3,
     "year": 2,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["MATH1321"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "MATH1321"
+    ],
     "description": "Probability theory and statistical methods for engineers."
   },
   {
@@ -192,9 +261,14 @@
     "credits": 2,
     "year": 2,
     "semester": 1,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["ENGC1202"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "ENGC1202"
+    ],
     "description": "Intermediate-level English language course, part 3."
   },
   {
@@ -203,9 +277,14 @@
     "credits": 3,
     "year": 2,
     "semester": 1,
-    "category": "Faculty Requirement",
+    "requirementType": "College Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["MATH1321"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "MATH1321"
+    ],
     "description": "First and higher-order ordinary differential equations."
   },
   {
@@ -214,9 +293,14 @@
     "credits": 4,
     "year": 2,
     "semester": 2,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Software",
     "type": "Core",
-    "prerequisites": ["COMP133"],
+    "hasLab": false,
+    "projectCount": 1,
+    "prerequisites": [
+      "COMP133"
+    ],
     "description": "Stacks, queues, trees, hash tables, and algorithm analysis."
   },
   {
@@ -225,9 +309,14 @@
     "credits": 1,
     "year": 2,
     "semester": 2,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Hardware",
     "type": "Core",
-    "prerequisites": ["ENCS2340"],
+    "hasLab": true,
+    "projectCount": 0,
+    "prerequisites": [
+      "ENCS2340"
+    ],
     "description": "Lab work accompanying Computer Organization and Digital Systems."
   },
   {
@@ -236,9 +325,14 @@
     "credits": 3,
     "year": 2,
     "semester": 2,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Hardware",
     "type": "Core",
-    "prerequisites": ["ENCS2340"],
+    "hasLab": false,
+    "projectCount": 1,
+    "prerequisites": [
+      "ENCS2340"
+    ],
     "description": "CPU architecture, instruction sets, and microprocessor basics."
   },
   {
@@ -247,9 +341,14 @@
     "credits": 3,
     "year": 2,
     "semester": 2,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Hardware",
     "type": "Core",
-    "prerequisites": ["PHYS132"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "PHYS132"
+    ],
     "description": "Analysis of resistive, capacitive, and inductive electrical circuits."
   },
   {
@@ -258,9 +357,14 @@
     "credits": 3,
     "year": 2,
     "semester": 2,
-    "category": "Core",
+    "requirementType": "Specialization Requirement",
+    "area": "Hardware",
     "type": "Core",
-    "prerequisites": ["MATH1321"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "MATH1321"
+    ],
     "description": "Continuous and discrete signals, systems, and transforms."
   },
   {
@@ -269,9 +373,14 @@
     "credits": 2,
     "year": 2,
     "semester": 2,
-    "category": "University Requirement",
+    "requirementType": "University Requirement",
+    "area": null,
     "type": "Core",
-    "prerequisites": ["ENGC2201"],
+    "hasLab": false,
+    "projectCount": 0,
+    "prerequisites": [
+      "ENGC2201"
+    ],
     "description": "Intermediate-level English language course, part 4."
   }
 ]
