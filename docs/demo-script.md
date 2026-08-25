@@ -2,7 +2,8 @@
 
 **Project:** Computer Engineering Course Planner MCP Server
 **Presenter:** Jeneen Mohsen Sattouf — Birzeit University, Computer Engineering
-**Repository:** `jen2024-rim/Building-an-MCP-for-an-AI-Engine` (branch: `week-6-ship`)
+**Repository:** `jen2024-rim/Building-an-MCP-for-an-AI-Engine`
+**Release:** `v1.0.0` — Demo Day ship
 
 ---
 
