@@ -8,6 +8,7 @@ import { listCompletedCoursesInputSchema } from "./schemas/listCompletedCourses.
 import { listRemainingCoursesInputSchema } from "./schemas/listRemainingCourses.js";
 import { addCourseToPlanInputSchema } from "./schemas/addCourseToPlan.js";
 import { completeCourseInputSchema } from "./schemas/completeCourse.js";
+import { removeCourseFromPlanInputSchema } from "./schemas/removeCourseFromPlan.js";
 
 import { searchCoursesHandler } from "./tools/searchCourses.js";
 import { checkPrerequisitesHandler } from "./tools/checkPrerequisites.js";
@@ -16,6 +17,7 @@ import { listCompletedCoursesHandler } from "./tools/listCompletedCourses.js";
 import { listRemainingCoursesHandler } from "./tools/listRemainingCourses.js";
 import { addCourseToPlanHandler } from "./tools/addCourseToPlan.js";
 import { completeCourseHandler } from "./tools/completeCourse.js";
+import { removeCourseFromPlanHandler } from "./tools/removeCourseFromPlan.js";
 
 const server = new McpServer({
   name: "course-planner-mcp",
@@ -78,6 +80,16 @@ server.registerTool(
     inputSchema: completeCourseInputSchema.shape,
   },
   completeCourseHandler
+);
+
+server.registerTool(
+  "remove_course_from_plan",
+  {
+    description:
+      "Remove a course from the student's current plan without marking it completed — it returns to the remaining courses list.",
+    inputSchema: removeCourseFromPlanInputSchema.shape,
+  },
+  removeCourseFromPlanHandler
 );
 
 async function main() {
