@@ -186,3 +186,39 @@ export async function completeCourse(courseCode: string): Promise<CompleteCourse
     currentPlan: student.currentPlan,
   };
 }
+/* -------------------------------------------------------------------------- */
+/* P0 — remove_course_from_plan                                               */
+/* -------------------------------------------------------------------------- */
+
+export interface RemoveCourseFromPlanResult {
+  success: boolean;
+  courseCode: string;
+  currentPlan: SemesterPlan[];
+}
+
+export async function removeCourseFromPlan(courseCode: string): Promise<RemoveCourseFromPlanResult> {
+  const courses = await loadCourses();
+  const course = getCourseByCode(courses, courseCode);
+
+  if (!course) {
+    throw new Error(`Course "${courseCode}" was not found.`);
+  }
+
+  const canonicalCode = course.code;
+  const student = await loadStudent();
+
+  student.currentPlan = student.currentPlan
+    .map((entry) => ({
+      ...entry,
+      courses: entry.courses.filter((c) => normalize(c) !== normalize(canonicalCode)),
+    }))
+    .filter((entry) => entry.courses.length > 0);
+
+  await saveStudent(student);
+
+  return {
+    success: true,
+    courseCode: canonicalCode,
+    currentPlan: student.currentPlan,
+  };
+}
